@@ -19,6 +19,7 @@ class _CommonButtonState extends State<CommonButton> {
   @override
   Widget build(BuildContext context) {
     return MouseRegion(
+      cursor: SystemMouseCursors.grab,
       onEnter: (_) {
         setState(() {
           isHove = true;
@@ -81,6 +82,7 @@ class _CommonTextButtonState extends State<CommonTextButton> {
   @override
   Widget build(BuildContext context) {
     return MouseRegion(
+      cursor: SystemMouseCursors.grab,
       onEnter: (_) {
         setState(() {
           isHove = true;
@@ -125,6 +127,117 @@ class _CommonTextButtonState extends State<CommonTextButton> {
                 )
               : Container()
         ]),
+      ),
+    );
+  }
+}
+
+class CommonBlankButton extends StatefulWidget {
+  const CommonBlankButton(
+      {Key? key, required this.title, this.icon, required this.linkAction})
+      : super(key: key);
+  final String title;
+  final Widget? icon;
+  final Function linkAction;
+
+  @override
+  State<CommonBlankButton> createState() => _CommonBlankButtonState();
+}
+
+class _CommonBlankButtonState extends State<CommonBlankButton> {
+  bool isHove = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return MouseRegion(
+      cursor: SystemMouseCursors.grab,
+      onEnter: (_) {
+        setState(() {
+          isHove = true;
+        });
+      },
+      onExit: (_) {
+        setState(() {
+          isHove = false;
+        });
+      },
+      child: GestureDetector(
+        onTap: () {
+          widget.linkAction();
+        },
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+          decoration: BoxDecoration(
+              color: Colors.white,
+              border: Border.all(
+                  color: isHove
+                      ? Colors.black54
+                      : Color.fromRGBO(207, 212, 217, 1.0),
+                  width: 2),
+              borderRadius: BorderRadius.circular(5)),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                margin: EdgeInsets.only(right: 10),
+                child: Text(
+                  widget.title,
+                  style: const TextStyle(fontSize: 16, color: Colors.black54),
+                ),
+              ),
+              widget.icon ?? Container(),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class ContentTextButton extends StatefulWidget {
+  const ContentTextButton({
+    Key? key,
+    required this.title,
+    required this.color,
+    required this.linkAction,
+  }) : super(key: key);
+  final String title;
+  final Color color;
+  final Function linkAction;
+
+  @override
+  State<ContentTextButton> createState() => _ContentTextButtonState();
+}
+
+class _ContentTextButtonState extends State<ContentTextButton> {
+  bool isHove = false;
+  @override
+  Widget build(BuildContext context) {
+    return MouseRegion(
+      cursor: SystemMouseCursors.grab,
+      onEnter: (_) {
+        setState(() {
+          isHove = true;
+        });
+      },
+      onExit: (_) {
+        setState(() {
+          isHove = false;
+        });
+      },
+      child: GestureDetector(
+        onTap: () {
+          widget.linkAction();
+        },
+        child: Text(
+          widget.title,
+          style: TextStyle(
+            fontSize: 17,
+            color: Colors.black,
+            fontWeight: FontWeight.bold,
+            decoration: isHove ? TextDecoration.underline : TextDecoration.none,
+          ),
+        ),
       ),
     );
   }

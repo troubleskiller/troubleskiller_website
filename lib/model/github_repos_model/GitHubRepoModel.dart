@@ -1,12 +1,13 @@
 class GitHubRepoModel {
-  GitHubRepoModel({
-    this.name,
-    this.fullName,
-    this.private,
-    this.htmlUrl,
-    this.description,
-    this.defaultBranch,
-  });
+  GitHubRepoModel(
+      {this.name,
+      this.fullName,
+      this.private,
+      this.htmlUrl,
+      this.description,
+      this.defaultBranch,
+      this.countOfStars,
+      this.createdAt});
 
   GitHubRepoModel.fromJson(dynamic json) {
     name = json['name'];
@@ -15,13 +16,18 @@ class GitHubRepoModel {
     htmlUrl = json['html_url'];
     description = json['description'];
     defaultBranch = json['default_branch'];
+    createdAt = json['created_at'];
+    countOfStars = json['stargazers_count'];
   }
+
   String? name;
   String? fullName;
   bool? private;
   String? htmlUrl;
   String? description;
   String? defaultBranch;
+  String? createdAt;
+  int? countOfStars;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -31,6 +37,8 @@ class GitHubRepoModel {
     map['html_url'] = htmlUrl;
     map['description'] = description;
     map['default_branch'] = defaultBranch;
+    map['created_at'] = createdAt;
+    map['stargazers_count'] = countOfStars;
     return map;
   }
 }
