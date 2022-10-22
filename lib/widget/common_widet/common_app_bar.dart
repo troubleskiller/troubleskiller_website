@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:troubleskiller_blog/widget/common_widet/common_button.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CommonAppBar({
@@ -9,6 +10,12 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   final Size preferredSize;
+
+  Future<void> _launchUrl(url) async {
+    if (!await launchUrl(url)) {
+      throw 'Could not launch $url';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,31 +31,39 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Row(
-            children: const [
-              CommonButton(title: 'troubleskiller'),
-              SizedBox(width: 30),
+            children: [
+              CommonButton(title: 'troubleskiller', linkAction: () {}),
+              const SizedBox(width: 30),
               CommonTextButton(
                 title: 'About me',
                 color: Colors.green,
+                linkAction: () {},
               ),
-              SizedBox(width: 30),
+              const SizedBox(width: 30),
               CommonTextButton(
                 title: 'Writing',
                 color: Colors.blue,
+                linkAction: () {},
               ),
-              SizedBox(width: 30),
+              const SizedBox(width: 30),
               CommonTextButton(
                 title: 'Project',
                 color: Colors.yellow,
+                linkAction: () {},
               ),
-              SizedBox(width: 30),
+              const SizedBox(width: 30),
               CommonTextButton(
                 title: 'GitHub',
                 color: Colors.purple,
+                linkAction: () {
+                  _launchUrl(
+                    Uri.parse('https://github.com/troubleskiller'),
+                  );
+                },
               ),
             ],
           ),
-          const CommonButton(title: 'Light'),
+          CommonButton(title: 'Light', linkAction: () {}),
         ],
       ),
     );
