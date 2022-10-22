@@ -14,8 +14,8 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return Container(
       height: preferredSize.height,
-      padding: EdgeInsets.symmetric(horizontal: 40, vertical: 20),
-      decoration: BoxDecoration(
+      padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 20),
+      decoration: const BoxDecoration(
           color: Color.fromRGBO(242, 243, 245, 1.0),
           border: Border.symmetric(
               vertical: BorderSide(
@@ -24,19 +24,31 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Row(
-            children: [
+            children: const [
               CommonButton(title: 'troubleskiller'),
               SizedBox(width: 30),
-              CommonTextButton(title: 'About me'),
+              CommonTextButton(
+                title: 'About me',
+                color: Colors.green,
+              ),
               SizedBox(width: 30),
-              CommonTextButton(title: 'Writing'),
+              CommonTextButton(
+                title: 'Writing',
+                color: Colors.blue,
+              ),
               SizedBox(width: 30),
-              CommonTextButton(title: 'Project'),
+              CommonTextButton(
+                title: 'Project',
+                color: Colors.yellow,
+              ),
               SizedBox(width: 30),
-              CommonTextButton(title: 'GitHub'),
+              CommonTextButton(
+                title: 'GitHub',
+                color: Colors.purple,
+              ),
             ],
           ),
-          CommonButton(title: 'Light'),
+          const CommonButton(title: 'Light'),
         ],
       ),
     );
