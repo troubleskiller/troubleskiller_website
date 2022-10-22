@@ -38,12 +38,12 @@ class _CommonButtonState extends State<CommonButton> {
           padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 5),
           decoration: BoxDecoration(
               color: isHove
-                  ? Color.fromRGBO(223, 226, 230, 1.0)
-                  : Color.fromRGBO(234, 236, 239, 1.0),
+                  ? const Color.fromRGBO(223, 226, 230, 1.0)
+                  : const Color.fromRGBO(234, 236, 239, 1.0),
               border: Border.all(
                   color: isHove
-                      ? Color.fromRGBO(174, 181, 188, 1.0)
-                      : Color.fromRGBO(207, 212, 217, 1.0),
+                      ? const Color.fromRGBO(174, 181, 188, 1.0)
+                      : const Color.fromRGBO(207, 212, 217, 1.0),
                   width: 2),
               borderRadius: BorderRadius.circular(5)),
           child: Row(
@@ -172,14 +172,14 @@ class _CommonBlankButtonState extends State<CommonBlankButton> {
               border: Border.all(
                   color: isHove
                       ? Colors.black54
-                      : Color.fromRGBO(207, 212, 217, 1.0),
+                      : const Color.fromRGBO(207, 212, 217, 1.0),
                   width: 2),
               borderRadius: BorderRadius.circular(5)),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                margin: EdgeInsets.only(right: 10),
+                margin: const EdgeInsets.only(right: 5),
                 child: Text(
                   widget.title,
                   style: const TextStyle(fontSize: 16, color: Colors.black54),
