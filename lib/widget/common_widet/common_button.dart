@@ -3,9 +3,14 @@ import 'package:troubleskiller_blog/helper/common_helper.dart';
 
 class CommonButton extends StatefulWidget {
   const CommonButton(
-      {Key? key, required this.title, this.icon, required this.linkAction})
+      {Key? key,
+      required this.title,
+      this.icon,
+      required this.linkAction,
+      required this.deviceWidth})
       : super(key: key);
   final String title;
+  final double deviceWidth;
   final Widget? icon;
   final Function linkAction;
 
@@ -35,7 +40,7 @@ class _CommonButtonState extends State<CommonButton> {
           widget.linkAction();
         },
         child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 5),
+          padding: const EdgeInsets.symmetric(vertical: 5),
           decoration: BoxDecoration(
               color: isHove
                   ? const Color.fromRGBO(223, 226, 230, 1.0)
@@ -46,13 +51,28 @@ class _CommonButtonState extends State<CommonButton> {
                       : const Color.fromRGBO(207, 212, 217, 1.0),
                   width: 2),
               borderRadius: BorderRadius.circular(5)),
-          child: Row(
+          child: Flex(
+            direction: Axis.horizontal,
             children: [
-              widget.icon ?? Container(),
-              Text(
-                widget.title,
-                style: const TextStyle(fontSize: 20, color: Colors.black54),
+              Expanded(flex: 1, child: SizedBox()),
+              widget.icon != null
+                  ? Expanded(
+                      flex: 4,
+                      child: widget.icon!,
+                    )
+                  : Container(),
+              widget.icon != null
+                  ? Expanded(
+                      flex: widget.deviceWidth > 950 ? 1 : 0, child: SizedBox())
+                  : Container(),
+              Expanded(
+                flex: widget.deviceWidth > 950 ? 10 : 0,
+                child: Text(
+                  widget.title,
+                  style: const TextStyle(fontSize: 20, color: Colors.black54),
+                ),
               ),
+              Expanded(flex: 1, child: SizedBox())
             ],
           ),
         ),
@@ -67,6 +87,7 @@ class CommonTextButton extends StatefulWidget {
     required this.title,
     required this.color,
     required this.linkAction,
+    required double deviceWidth,
   }) : super(key: key);
   final String title;
   final Color color;
@@ -107,6 +128,7 @@ class _CommonTextButtonState extends State<CommonTextButton> {
                 fontSize: 15,
                 color: Colors.black54,
               ),
+              textScaleFactor: MediaQuery.of(context).textScaleFactor,
             ),
           ),
           isHove

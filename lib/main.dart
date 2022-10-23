@@ -39,6 +39,8 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int activePageIndex = 0;
 
+  double? _deviceWidth;
+
   final PageController pageController = PageController();
 
   void setActivePageIndex(int index) {
@@ -63,9 +65,11 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    _deviceWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: CommonAppBar(
+        deviceWidth: _deviceWidth!,
         changeIndex: setActivePageIndex,
         pageController: pageController,
       ),
