@@ -81,21 +81,21 @@ class _CommonTextButtonState extends State<CommonTextButton> {
 
   @override
   Widget build(BuildContext context) {
-    return MouseRegion(
-      cursor: SystemMouseCursors.grab,
-      onEnter: (_) {
-        setState(() {
-          isHove = true;
-        });
+    return GestureDetector(
+      onTap: () {
+        widget.linkAction();
       },
-      onExit: (_) {
-        setState(() {
-          isHove = false;
-        });
-      },
-      child: GestureDetector(
-        onTap: () {
-          widget.linkAction();
+      child: MouseRegion(
+        cursor: SystemMouseCursors.grab,
+        onEnter: (_) {
+          setState(() {
+            isHove = true;
+          });
+        },
+        onExit: (_) {
+          setState(() {
+            isHove = false;
+          });
         },
         child: Stack(children: [
           Container(
@@ -211,6 +211,7 @@ class ContentTextButton extends StatefulWidget {
 
 class _ContentTextButtonState extends State<ContentTextButton> {
   bool isHove = false;
+
   @override
   Widget build(BuildContext context) {
     return MouseRegion(

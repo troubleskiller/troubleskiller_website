@@ -6,12 +6,14 @@ import 'package:url_launcher/url_launcher.dart';
 class ProjectScreen extends StatefulWidget {
   const ProjectScreen({Key? key, required this.githubRepos}) : super(key: key);
   final List<GitHubRepoModel> githubRepos;
+
   @override
   State<ProjectScreen> createState() => _ProjectScreenState();
 }
 
 class _ProjectScreenState extends State<ProjectScreen> {
   List<GitHubRepoModel> githubRepos = [];
+
   // final GitHubController _githubController = GitHubController();
   // List<GitHubRepoModel> githubRepos = [];
   //
@@ -38,13 +40,15 @@ class _ProjectScreenState extends State<ProjectScreen> {
     super.initState();
   }
 
-  @override
-  Widget build(BuildContext context) {
+  Widget getUserRepoWidget() {
     return GridView.builder(
+        shrinkWrap: true,
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 3, //横轴三个子widget
-            childAspectRatio: 1.8 //宽高比为1时，子widget
-            ),
+          crossAxisCount: 3, //横轴三个子widget
+          childAspectRatio: 1.8, //宽高比为1时，子widget
+          mainAxisSpacing: 20.0, // 纵轴间距
+          crossAxisSpacing: 20.0,
+        ),
         itemCount: githubRepos.length,
         itemBuilder: (_, int index) {
           return GitHubRepoWidget(
@@ -59,5 +63,26 @@ class _ProjectScreenState extends State<ProjectScreen> {
             countOfStars: githubRepos[index].countOfStars ?? 0,
           );
         });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView(
+      padding: const EdgeInsets.all(20.0),
+      children: [
+        SizedBox(
+          height: 20,
+        ),
+        Text(
+          'Projects',
+          style: TextStyle(
+              color: Colors.black, fontSize: 40, fontWeight: FontWeight.bold),
+        ),
+        SizedBox(
+          height: 20,
+        ),
+        getUserRepoWidget(),
+      ],
+    );
   }
 }
