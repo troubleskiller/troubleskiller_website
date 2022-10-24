@@ -29,20 +29,10 @@ final List<String> tickerTabStrings = <String>[
   'writing',
 ];
 
-class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
+class CommonAppBar extends StatelessWidget {
   const CommonAppBar({
     Key? key,
-    this.preferredSize = const Size.fromHeight(80),
-    required this.changeIndex,
-    required this.pageController,
-    required this.deviceWidth,
   }) : super(key: key);
-
-  @override
-  final Size preferredSize;
-  final Function changeIndex;
-  final PageController pageController;
-  final double deviceWidth;
 
   Future<void> _launchUrl(url) async {
     if (!await launchUrl(url)) {
@@ -52,97 +42,56 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: preferredSize.height,
-      padding: EdgeInsets.symmetric(vertical: deviceWidth > 900 ? 20 : 10),
-      decoration: const BoxDecoration(
-          color: Color.fromRGBO(242, 243, 245, 1.0),
-          border: Border.symmetric(
-              vertical: BorderSide(
-                  width: 1, color: Color.fromRGBO(234, 236, 239, 1.0)))),
-      child: Flex(
-        direction: Axis.horizontal,
-        children: [
-          Expanded(flex: deviceWidth > 900 ? 8 : 1, child: SizedBox()),
-          Expanded(
-            // flex: 15,
-            flex: deviceWidth > 900 ? 30 : 19,
-            child: Flex(
-              direction: Axis.horizontal,
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Expanded(
-                  flex: deviceWidth > 900 ? 8 : 4,
-                  child: CommonButton(
-                      deviceWidth: deviceWidth,
-                      title: deviceWidth > 900 ? 'troubleskiller' : '',
-                      icon: Icon(
-                        Icons.save_as_outlined,
-                        color: Colors.grey,
-                      ),
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Container(
+          padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+          decoration: const BoxDecoration(
+              color: Color.fromRGBO(242, 243, 245, 1.0),
+              border: Border.symmetric(
+                  vertical: BorderSide(
+                      width: 1, color: Color.fromRGBO(234, 236, 239, 1.0)))),
+          child: Row(
+            // mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              CommonButton(
+                  title: MediaQuery.of(context).size.width > 600
+                      ? 'troubleskiller'
+                      : '',
+                  icon: Icon(
+                    Icons.save_as_outlined,
+                    color: Colors.grey,
+                  ),
+                  linkAction: () {}),
+              CommonTextButton(
+                title: 'About me',
+                color: Colors.green,
+                linkAction: () {},
+              ),
+              CommonTextButton(
+                title: 'Writing',
+                color: Colors.blue,
+                linkAction: () {},
+              ),
+              CommonTextButton(
+                title: 'Project',
+                color: Colors.yellow,
+                linkAction: () {},
+              ),
+              MediaQuery.of(context).size.width > 600
+                  ? CommonTextButton(
+                      title: 'GitHub',
+                      color: Colors.purple,
                       linkAction: () {
-                        // changeIndex;
-                        pageController.jumpToPage(0);
-                      }),
-                ),
-                Expanded(flex: 1, child: SizedBox()),
-                Expanded(
-                    flex: 6,
-                    child: CommonTextButton(
-                      deviceWidth: deviceWidth,
-                      title: 'About me',
-                      color: Colors.green,
-                      linkAction: () {
-                        pageController.jumpToPage(1);
+                        _launchUrl(
+                          Uri.parse('https://github.com/troubleskiller'),
+                        );
                       },
-                    )),
-                Expanded(flex: 1, child: SizedBox()),
-                Expanded(
-                  flex: 5,
-                  child: CommonTextButton(
-                    deviceWidth: deviceWidth,
-                    title: 'Writing',
-                    color: Colors.blue,
-                    linkAction: () {
-                      pageController.jumpToPage(2);
-                    },
-                  ),
-                ),
-                Expanded(flex: 1, child: SizedBox()),
-                Expanded(
-                  flex: 5,
-                  child: CommonTextButton(
-                    deviceWidth: deviceWidth,
-                    title: 'Project',
-                    color: Colors.yellow,
-                    linkAction: () {
-                      pageController.jumpToPage(3);
-                    },
-                  ),
-                ),
-                Expanded(flex: 1, child: SizedBox()),
-                deviceWidth > 600
-                    ? Expanded(
-                        flex: 4,
-                        child: CommonTextButton(
-                          deviceWidth: deviceWidth,
-                          title: 'GitHub',
-                          color: Colors.purple,
-                          linkAction: () {
-                            _launchUrl(
-                              Uri.parse('https://github.com/troubleskiller'),
-                            );
-                          },
-                        ))
-                    : Expanded(flex: 3, child: SizedBox()),
-                Expanded(flex: 1, child: SizedBox()),
-              ],
-            ),
-          ),
-          Expanded(
-              flex: deviceWidth > 900 ? 3 : 2,
-              child: CommonButton(
-                  deviceWidth: deviceWidth,
+                    )
+                  : Container(),
+              CommonButton(
                   icon: Icon(
                     Icons.dark_mode_outlined,
                     color: Color.fromRGBO(
@@ -152,11 +101,16 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
                       1.0,
                     ),
                   ),
-                  title: deviceWidth > 900 ? 'Light' : '',
-                  linkAction: () {})),
-          Expanded(flex: deviceWidth > 900 ? 8 : 1, child: SizedBox()),
-        ],
-      ),
+                  title: MediaQuery.of(context).size.width > 600 ? 'Light' : '',
+                  linkAction: () {}),
+            ],
+          ),
+        ),
+        Container(
+            height: 1,
+            margin: const EdgeInsets.only(bottom: 30),
+            color: const Color(0xFFEEEEEE)),
+      ],
     );
   }
 }

@@ -2,16 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:troubleskiller_blog/helper/common_helper.dart';
 
 class CommonButton extends StatefulWidget {
-  const CommonButton(
-      {Key? key,
-      required this.title,
-      this.icon,
-      required this.linkAction,
-      required this.deviceWidth})
-      : super(key: key);
+  const CommonButton({
+    Key? key,
+    required this.title,
+    required this.icon,
+    required this.linkAction,
+  }) : super(key: key);
   final String title;
-  final double deviceWidth;
-  final Widget? icon;
+  final Widget icon;
   final Function linkAction;
 
   @override
@@ -51,28 +49,24 @@ class _CommonButtonState extends State<CommonButton> {
                       : const Color.fromRGBO(207, 212, 217, 1.0),
                   width: 2),
               borderRadius: BorderRadius.circular(5)),
-          child: Flex(
-            direction: Axis.horizontal,
+          child: Row(
             children: [
-              Expanded(flex: 1, child: SizedBox()),
-              widget.icon != null
-                  ? Expanded(
-                      flex: 4,
-                      child: widget.icon!,
+              SizedBox(
+                width: 10,
+              ),
+              widget.icon,
+              SizedBox(
+                width: 10,
+              ),
+              Text(
+                widget.title,
+                style: const TextStyle(fontSize: 20, color: Colors.black54),
+              ),
+              widget.title != ''
+                  ? SizedBox(
+                      width: 10,
                     )
                   : Container(),
-              widget.icon != null
-                  ? Expanded(
-                      flex: widget.deviceWidth > 950 ? 1 : 0, child: SizedBox())
-                  : Container(),
-              Expanded(
-                flex: widget.deviceWidth > 950 ? 10 : 0,
-                child: Text(
-                  widget.title,
-                  style: const TextStyle(fontSize: 20, color: Colors.black54),
-                ),
-              ),
-              Expanded(flex: 1, child: SizedBox())
             ],
           ),
         ),
@@ -87,7 +81,6 @@ class CommonTextButton extends StatefulWidget {
     required this.title,
     required this.color,
     required this.linkAction,
-    required double deviceWidth,
   }) : super(key: key);
   final String title;
   final Color color;
@@ -125,10 +118,9 @@ class _CommonTextButtonState extends State<CommonTextButton> {
             child: Text(
               widget.title,
               style: const TextStyle(
-                fontSize: 15,
+                // fontSize: 15,
                 color: Colors.black54,
               ),
-              textScaleFactor: MediaQuery.of(context).textScaleFactor,
             ),
           ),
           isHove
@@ -204,7 +196,10 @@ class _CommonBlankButtonState extends State<CommonBlankButton> {
                 margin: const EdgeInsets.only(right: 5),
                 child: Text(
                   widget.title,
-                  style: const TextStyle(fontSize: 16, color: Colors.black54),
+                  style: const TextStyle(
+                      fontSize: 16,
+                      color: Colors.black54,
+                      decoration: TextDecoration.none),
                 ),
               ),
               widget.icon ?? Container(),
@@ -255,11 +250,14 @@ class _ContentTextButtonState extends State<ContentTextButton> {
         child: Text(
           widget.title,
           style: TextStyle(
-            fontSize: 17,
-            color: Colors.black,
-            fontWeight: FontWeight.bold,
-            decoration: isHove ? TextDecoration.underline : TextDecoration.none,
-          ),
+              fontSize: 17,
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
+              decoration:
+                  isHove ? TextDecoration.underline : TextDecoration.none,
+              decorationStyle: TextDecorationStyle.dashed,
+              decorationColor: Colors.black),
+          maxLines: 1,
         ),
       ),
     );

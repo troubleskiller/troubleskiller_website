@@ -31,12 +31,18 @@ class GitHubRepoWidget extends StatelessWidget {
             children: [
               Text(
                 time,
-                style: const TextStyle(color: Colors.grey, fontSize: 15),
+                style: const TextStyle(
+                    color: Colors.grey,
+                    fontSize: 15,
+                    decoration: TextDecoration.none),
               ),
               Row(
                 children: [
                   Text(countOfStars.toString(),
-                      style: const TextStyle(color: Colors.grey, fontSize: 15)),
+                      style: const TextStyle(
+                          color: Colors.grey,
+                          fontSize: 15,
+                          decoration: TextDecoration.none)),
                   const Icon(
                     Icons.star_border,
                     size: 20,
@@ -46,22 +52,22 @@ class GitHubRepoWidget extends StatelessWidget {
               )
             ],
           ),
-          const SizedBox(
-            height: 10,
-          ),
+          const Spacer(),
           ContentTextButton(
             title: title,
             color: Colors.black,
             linkAction: linkAction,
           ),
-          const SizedBox(
-            height: 10,
-          ),
+          const Spacer(),
           Text(
             description,
             style: const TextStyle(
-                color: Colors.grey, fontSize: 15, fontStyle: FontStyle.italic),
+                color: Colors.grey,
+                fontSize: 15,
+                fontStyle: FontStyle.italic,
+                decoration: TextDecoration.none),
             maxLines: 2,
+            overflow: TextOverflow.fade,
           ),
           const Spacer(),
           Row(
@@ -78,9 +84,7 @@ class GitHubRepoWidget extends StatelessWidget {
               const Spacer(),
             ],
           ),
-          const SizedBox(
-            height: 5,
-          ),
+          const Spacer(),
         ],
       ),
     );
