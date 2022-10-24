@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:troubleskiller_blog/widget/common_widet/common_app_bar.dart';
 
 class WritingScreen extends StatefulWidget {
   const WritingScreen({Key? key}) : super(key: key);
@@ -16,11 +17,14 @@ class _WritingScreenState extends State<WritingScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-        child: Container(
-      height: 100,
-      width: 100,
-      color: Colors.grey,
-    ));
+    return Scaffold(
+      appBar: CommonAppBar(),
+      body: Center(
+          child: Container(
+        height: 100,
+        width: 100,
+        color: Colors.grey,
+      )),
+    );
   }
 }

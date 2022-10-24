@@ -1,4 +1,3 @@
-import 'package:animations/animations.dart';
 import 'package:flutter/widgets.dart';
 
 class Routes {
@@ -13,9 +12,11 @@ class Routes {
       settings: settings,
       transitionDuration: Duration(milliseconds: duration),
       pageBuilder: (context, animation, secondaryAnimation) => page(context),
-      transitionsBuilder: (context, animation, secondaryAnimation, child) {
-        return FadeScaleTransition(animation: animation, child: child);
-      },
+
+      /// 暂时不考虑添加动画
+      // transitionsBuilder: (context, animation, secondaryAnimation, child) {
+      //   return FadeScaleTransition(animation: animation, child: child);
+      // },
     );
   }
 }

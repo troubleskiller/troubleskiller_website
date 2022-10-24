@@ -30,10 +30,13 @@ final List<String> tickerTabStrings = <String>[
   'writing',
 ];
 
-class CommonAppBar extends StatelessWidget {
+class CommonAppBar extends StatelessWidget with PreferredSizeWidget {
   const CommonAppBar({
     Key? key,
-  }) : super(key: key);
+  })  : preferredSize = const Size.fromHeight(125.0),
+        super(key: key);
+  @override
+  final Size preferredSize;
 
   Future<void> _launchUrl(url) async {
     if (!await launchUrl(url)) {

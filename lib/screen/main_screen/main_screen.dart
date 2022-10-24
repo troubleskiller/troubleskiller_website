@@ -20,12 +20,12 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: CommonAppBar(),
       body: SingleChildScrollView(
         child: Container(
           margin: const EdgeInsets.symmetric(horizontal: 32),
           child: Column(
             children: [
-              CommonAppBar(),
               Row(
                 children: [
                   Container(
