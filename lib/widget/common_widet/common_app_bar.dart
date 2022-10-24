@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:troubleskiller_blog/helper/router.dart';
 import 'package:troubleskiller_blog/widget/common_widet/common_button.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -64,21 +65,30 @@ class CommonAppBar extends StatelessWidget {
                     Icons.save_as_outlined,
                     color: Colors.grey,
                   ),
-                  linkAction: () {}),
+                  linkAction: () {
+                    Navigator.popUntil(context,
+                        ModalRoute.withName(Navigator.defaultRouteName));
+                  }),
               CommonTextButton(
                 title: 'About me',
                 color: Colors.green,
-                linkAction: () {},
+                linkAction: () {
+                  Navigator.pushNamed(context, Routes.aboutMe);
+                },
               ),
               CommonTextButton(
                 title: 'Writing',
                 color: Colors.blue,
-                linkAction: () {},
+                linkAction: () {
+                  Navigator.pushNamed(context, Routes.writing);
+                },
               ),
               CommonTextButton(
                 title: 'Project',
                 color: Colors.yellow,
-                linkAction: () {},
+                linkAction: () {
+                  Navigator.pushNamed(context, Routes.project);
+                },
               ),
               MediaQuery.of(context).size.width > 600
                   ? CommonTextButton(

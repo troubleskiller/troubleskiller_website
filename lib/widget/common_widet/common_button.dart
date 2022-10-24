@@ -124,14 +124,15 @@ class _CommonTextButtonState extends State<CommonTextButton> {
             ),
           ),
           isHove
-              ? Align(
-                  alignment: Alignment.bottomCenter,
+              ? Positioned(
+                  bottom: -5,
+                  // alignment: Alignment.bottomLeft,
                   child: Container(
                     margin: const EdgeInsets.only(bottom: 5),
                     width: CommonHelper.boundingTextSize(
                       widget.title,
                       const TextStyle(
-                        fontSize: 15,
+                        // fontSize: 15,
                         color: Colors.black54,
                       ),
                     ).width,
