@@ -9,16 +9,16 @@ class ImageWrapper extends StatelessWidget {
   Widget build(BuildContext context) {
     //Listen to inherited widget width updates.
     double width = MediaQuery.of(context).size.width / 4;
-
-    print(width);
-    return Container(
-      margin: const EdgeInsets.symmetric(vertical: 24),
-      child: Image.asset(
-        image,
-        width: width,
-        height: width / 0.8,
-        fit: BoxFit.cover,
-      ),
-    );
+    return MediaQuery.of(context).size.width > 800
+        ? Container(
+            margin: const EdgeInsets.symmetric(vertical: 24),
+            child: Image.asset(
+              image,
+              width: width,
+              height: width / 0.8,
+              fit: BoxFit.cover,
+            ),
+          )
+        : Container();
   }
 }
