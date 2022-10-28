@@ -40,6 +40,9 @@ dependencies:
   dio: ^4.0.6
   responsive_framework: ^0.2.0
   animations: ^2.0.7
+  flutter_markdown: ^0.6.12
+  mysql_utils: ^2.1.1
+  orm: ^2.4.2
 
 dev_dependencies:
   flutter_test:

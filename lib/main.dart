@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:mysql_utils/mysql_utils.dart';
 import 'package:responsive_framework/responsive_wrapper.dart';
 import 'package:responsive_framework/utils/scroll_behavior.dart';
 import 'package:troubleskiller_blog/data/github_dart.dart';
 import 'package:troubleskiller_blog/helper/router.dart';
+import 'package:troubleskiller_blog/model/blog.dart';
 import 'package:troubleskiller_blog/screen/about_me_screen/about_me_screen.dart';
 import 'package:troubleskiller_blog/screen/main_screen/main_screen.dart';
 import 'package:troubleskiller_blog/screen/project_screen/project_screen.dart';
@@ -28,10 +30,42 @@ class _MyAppState extends State<MyApp> {
     response = await _githubController.getRepos();
   }
 
+  Future<void> getMysql() async {
+    print('123');
+    var db = MysqlUtils(
+        settings: {
+          'host': '127.0.0.1',
+          'port': 3306,
+          'user': 'root',
+          'password': 'Xh010510.',
+          'db': 'blog',
+          'maxConnections': 10,
+          'secure': false,
+          'pool': true,
+        },
+        errorLog: (error) {
+          print(error);
+        },
+        sqlLog: (sql) {
+          print(sql);
+        },
+        connectInit: (db1) async {
+          print('whenComplete');
+        });
+    List<Blog> blogs = [];
+    var row1 = await db.getAll(
+      table: 'tb_blog',
+      fields: '*',
+      debug: true,
+    );
+    print(row1);
+  }
+
   @override
   void initState() {
     // TODO: implement initState
-    getUserRepo();
+    // getUserRepo();
+    getMysql();
     super.initState();
   }
 
