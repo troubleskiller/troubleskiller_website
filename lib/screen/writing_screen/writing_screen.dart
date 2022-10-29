@@ -19,12 +19,23 @@ class _WritingScreenState extends State<WritingScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CommonAppBar(),
-      body: Center(
-          child: Container(
-        height: 100,
-        width: 100,
-        color: Colors.grey,
-      )),
+      body:
+          // Center(
+          //   child: Container(
+          //     height: 200,
+          //     width: 200,
+          //     color: Colors.green,
+          //   ),
+          // )
+          Column(
+        children: [
+          Container(
+            height: 100,
+            width: 100,
+            color: Colors.grey,
+          ),
+        ],
+      ),
     );
   }
 }

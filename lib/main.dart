@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:mysql_utils/mysql_utils.dart';
+import 'package:flutter/services.dart';
 import 'package:responsive_framework/responsive_wrapper.dart';
 import 'package:responsive_framework/utils/scroll_behavior.dart';
 import 'package:troubleskiller_blog/data/github_dart.dart';
 import 'package:troubleskiller_blog/helper/router.dart';
-import 'package:troubleskiller_blog/model/blog.dart';
 import 'package:troubleskiller_blog/screen/about_me_screen/about_me_screen.dart';
 import 'package:troubleskiller_blog/screen/main_screen/main_screen.dart';
 import 'package:troubleskiller_blog/screen/project_screen/project_screen.dart';
@@ -30,42 +29,10 @@ class _MyAppState extends State<MyApp> {
     response = await _githubController.getRepos();
   }
 
-  Future<void> getMysql() async {
-    print('123');
-    var db = MysqlUtils(
-        settings: {
-          'host': '127.0.0.1',
-          'port': 3306,
-          'user': 'root',
-          'password': 'Xh010510.',
-          'db': 'blog',
-          'maxConnections': 10,
-          'secure': false,
-          'pool': true,
-        },
-        errorLog: (error) {
-          print(error);
-        },
-        sqlLog: (sql) {
-          print(sql);
-        },
-        connectInit: (db1) async {
-          print('whenComplete');
-        });
-    List<Blog> blogs = [];
-    var row1 = await db.getAll(
-      table: 'tb_blog',
-      fields: '*',
-      debug: true,
-    );
-    print(row1);
-  }
-
   @override
   void initState() {
     // TODO: implement initState
-    // getUserRepo();
-    getMysql();
+    getUserRepo();
     super.initState();
   }
 
@@ -106,66 +73,3 @@ class _MyAppState extends State<MyApp> {
     );
   }
 }
-
-// class MyHomePage extends StatefulWidget {
-//   const MyHomePage({super.key, required this.title});
-//
-//   final String title;
-//
-//   @override
-//   State<MyHomePage> createState() => _MyHomePageState();
-// }
-//
-// class _MyHomePageState extends State<MyHomePage> {
-//   int activePageIndex = 0;
-//
-//   double? _deviceWidth;
-//
-//   final PageController pageController = PageController();
-//
-//   void setActivePageIndex(int index) {
-//     setState(() {
-//       activePageIndex = index;
-//     });
-//   }
-//
-//   final GitHubController _githubController = GitHubController();
-//   List<GitHubRepoModel> githubRepos = [];
-//
-//   @override
-//   void initState() {
-//     // TODO: implement initState
-//     getUserRepo();
-//     super.initState();
-//   }
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     _deviceWidth = MediaQuery.of(context).size.width;
-//     return Scaffold(
-//       backgroundColor: Colors.white,
-//       appBar: CommonAppBar(
-//         deviceWidth: _deviceWidth!,
-//         changeIndex: setActivePageIndex,
-//         pageController: pageController,
-//       ),
-//       body: PageView(
-//         controller: pageController,
-//         onPageChanged: setActivePageIndex,
-//         // scrollDirection: Axis.vertical,
-//         // physics: NeverScrollableScrollPhysics(),
-//         children: [
-//           MainScreen(
-//             deviceWidth: _deviceWidth!,
-//           ),
-//           AboutMeScreen(),
-//           WritingScreen(),
-//           ProjectScreen(
-//             githubRepos: githubRepos,
-//             deviceWidth: _deviceWidth!,
-//           )
-//         ],
-//       ),
-//     );
-//   }
-// }
