@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:troubleskiller_blog/controller/blog_controller/blog_controller.dart';
+import 'package:troubleskiller_blog/controller/category_controller/category_controller.dart';
+import 'package:troubleskiller_blog/model/blog_model.dart';
 import 'package:troubleskiller_blog/model/category_model.dart';
 import 'package:troubleskiller_blog/widget/common_widet/common_app_bar.dart';
 import 'package:troubleskiller_blog/widget/writing_widget/category_widget.dart';
@@ -11,15 +14,37 @@ class WritingScreen extends StatefulWidget {
 }
 
 class _WritingScreenState extends State<WritingScreen> {
-  List<CategoryModel> list = [];
+  CategoryController categoryController = new CategoryController();
+  BlogController blogController = new BlogController();
+  List<CategoryModel> categoryList = [];
+  List<BlogModel> blogList = [];
+
   @override
   void initState() {
     // TODO: implement initState
+    getCategories();
+    getBlogs();
     super.initState();
   }
 
-  List<Widget> getList() {
-    return list.map((f) => CategoryList( categoryModel: f,)).toList();
+  Future<void> getCategories() async {
+    categoryList = await categoryController.selectAllCategory();
+  }
+
+  Future<void> getBlogs() async {
+    blogList = await blogController.selectAllBlog();
+  }
+
+  List<Widget> getCategoryList() {
+    return categoryList
+        .map((f) => CategoryList(
+              categoryModel: f,
+            ))
+        .toList();
+  }
+
+  List<Widget> getBlogList() {
+    return blogList.map((f) => Container(child: Text(f.title ?? ''))).toList();
   }
 
   @override
@@ -50,6 +75,9 @@ class _WritingScreenState extends State<WritingScreen> {
                   const SizedBox(
                     height: 20,
                   ),
+                  Column(
+                    children: getBlogList(),
+                  )
                 ],
               ),
               Container(
@@ -63,6 +91,9 @@ class _WritingScreenState extends State<WritingScreen> {
                     SizedBox(
                       height: 20,
                     ),
+                    Column(
+                      children: getCategoryList(),
+                    )
                   ],
                 ),
                 decoration: BoxDecoration(

@@ -52,7 +52,7 @@ class _MyAppState extends State<MyApp> {
             const ResponsiveBreakpoint.autoScale(2460, name: "4K"),
           ],
           background: Container(color: const Color(0xFFF5F5F5))),
-      initialRoute: Routes.writing,
+      initialRoute: Routes.home,
       onGenerateRoute: (RouteSettings settings) {
         return Routes.fadeThrough(settings, (context) {
           switch (settings.name) {

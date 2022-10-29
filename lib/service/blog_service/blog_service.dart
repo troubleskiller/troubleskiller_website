@@ -6,7 +6,7 @@ class BlogService {
     dynamic response;
     try {
       response = await Dio()
-          .get('http://127.0.0.1:8080/backend_blog/bolg/selectAllBlog');
+          .get('http://127.0.0.1:8080/backend_blog/blog/selectAllBlog');
     } catch (e) {
       if (kDebugMode) {
         print(e);
