@@ -37,14 +37,23 @@ class _WritingScreenState extends State<WritingScreen> {
 
   List<Widget> getCategoryList() {
     return categoryList
-        .map((f) => CategoryList(
-              categoryModel: f,
-            ))
+        .map(
+          (f) => CategoryList(
+            categoryModel: f,
+          ),
+        )
         .toList();
   }
 
   List<Widget> getBlogList() {
-    return blogList.map((f) => Container(child: Text(f.title ?? ''))).toList();
+    return blogList
+        .map(
+          (f) => ButTextButton(
+            title: f.title ?? '',
+            linkAction: () async {},
+          ),
+        )
+        .toList();
   }
 
   @override
