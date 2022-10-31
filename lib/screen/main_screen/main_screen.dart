@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_grid.dart';
+import 'package:troubleskiller_blog/data/common_date.dart';
 import 'package:troubleskiller_blog/helper/router.dart';
 import 'package:troubleskiller_blog/widget/common_widet/common_app_bar.dart';
 import 'package:troubleskiller_blog/widget/common_widet/common_button.dart';
 import 'package:troubleskiller_blog/widget/main_widget/main_widget.dart';
+import 'package:troubleskiller_blog/widget/main_widget/post_card.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({
@@ -38,19 +40,30 @@ class MainScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              ResponsiveGridView.builder(
-                  shrinkWrap: true,
-                  gridDelegate: const ResponsiveGridDelegate(
-                    childAspectRatio: 1.7,
-                    mainAxisSpacing: 20.0,
-                    crossAxisSpacing: 20.0,
-                    maxCrossAxisExtent: 500,
-                    minCrossAxisExtent: 400,
-                  ),
-                  itemCount: 3,
-                  itemBuilder: (_, int index) {
-                    return Container();
-                  }),
+              Offstage(
+                offstage: blogResponse.isEmpty,
+                child: ResponsiveGridView.builder(
+                    shrinkWrap: true,
+                    gridDelegate: const ResponsiveGridDelegate(
+                      childAspectRatio: 1.7,
+                      mainAxisSpacing: 20.0,
+                      crossAxisSpacing: 20.0,
+                      maxCrossAxisExtent: 500,
+                      minCrossAxisExtent: 400,
+                    ),
+                    itemCount: blogResponse.length,
+                    itemBuilder: (_, int index) {
+                      return PostCard(
+                        title: blogResponse[index].title ?? '',
+                        description: blogResponse[index].content ?? '',
+                        linkAction: () {},
+                        time: DateTime.fromMillisecondsSinceEpoch(
+                                blogResponse[index].publishTime ?? 0)
+                            .toString(),
+                        countOfStars: 12,
+                      );
+                    }),
+              ),
             ],
           ),
         ),

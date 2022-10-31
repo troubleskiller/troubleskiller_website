@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_grid.dart';
-import 'package:troubleskiller_blog/data/github_dart.dart';
+import 'package:troubleskiller_blog/data/common_date.dart';
 import 'package:troubleskiller_blog/widget/common_widet/common_app_bar.dart';
 import 'package:troubleskiller_blog/widget/github_widget/git_hub_repo_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -26,18 +26,18 @@ class ProjectScreen extends StatelessWidget {
           maxCrossAxisExtent: 500,
           minCrossAxisExtent: 400,
         ),
-        itemCount: response.length,
+        itemCount: githubResponse.length,
         itemBuilder: (_, int index) {
           return GitHubRepoWidget(
-            title: response[index].name ?? '',
-            description: response[index].description ?? '',
+            title: githubResponse[index].name ?? '',
+            description: githubResponse[index].description ?? '',
             linkAction: () {
               _launchUrl(
-                Uri.parse(response[index].htmlUrl ?? ''),
+                Uri.parse(githubResponse[index].htmlUrl ?? ''),
               );
             },
-            time: response[index].createdAt!.split('-')[0],
-            countOfStars: response[index].countOfStars ?? 0,
+            time: githubResponse[index].createdAt!.split('-')[0],
+            countOfStars: githubResponse[index].countOfStars ?? 0,
           );
         });
   }

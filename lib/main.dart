@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:responsive_framework/responsive_wrapper.dart';
 import 'package:responsive_framework/utils/scroll_behavior.dart';
-import 'package:troubleskiller_blog/data/github_dart.dart';
+import 'package:troubleskiller_blog/controller/blog_controller/blog_controller.dart';
+import 'package:troubleskiller_blog/controller/category_controller/category_controller.dart';
+import 'package:troubleskiller_blog/data/common_date.dart';
 import 'package:troubleskiller_blog/helper/router.dart';
 import 'package:troubleskiller_blog/screen/about_me_screen/about_me_screen.dart';
 import 'package:troubleskiller_blog/screen/main_screen/main_screen.dart';
@@ -24,15 +26,19 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   final GitHubController _githubController = GitHubController();
+  final BlogController _blogController = BlogController();
+  final CategoryController _categoryController = CategoryController();
 
-  Future<void> getUserRepo() async {
-    response = await _githubController.getRepos();
+  Future<void> initDate() async {
+    githubResponse = await _githubController.getRepos();
+    blogResponse = await _blogController.selectAllBlog();
+    categoryResponse = await _categoryController.selectAllCategory();
   }
 
   @override
   void initState() {
     // TODO: implement initState
-    getUserRepo();
+    initDate();
     super.initState();
   }
 
