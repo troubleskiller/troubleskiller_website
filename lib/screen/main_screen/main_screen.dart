@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:responsive_framework/responsive_grid.dart';
+import 'package:troubleskiller_blog/helper/router.dart';
 import 'package:troubleskiller_blog/widget/common_widet/common_app_bar.dart';
-import 'package:troubleskiller_blog/widget/common_widet/wrapper_widget/wrapper_image.dart';
+import 'package:troubleskiller_blog/widget/common_widet/common_button.dart';
+import 'package:troubleskiller_blog/widget/main_widget/main_widget.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({
@@ -10,53 +13,44 @@ class MainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CommonAppBar(),
+      appBar: const CommonAppBar(),
       body: SingleChildScrollView(
         child: Container(
-          margin: const EdgeInsets.symmetric(horizontal: 32),
+          margin: const EdgeInsets.symmetric(horizontal: 80),
           child: Column(
             children: [
+              const MainWidget(),
+              SizedBox(
+                height: 30,
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                mainAxisSize: MainAxisSize.max,
                 children: [
-                  Expanded(
-                    child: Container(
-                      color: Colors.blueGrey,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Container(
-                            color: Colors.grey,
-                            alignment: Alignment.topLeft,
-                            margin: EdgeInsets.symmetric(
-                                horizontal: 12, vertical: 10),
-                            child: Text(
-                              'Hi, I\'m Troubleskiller',
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 35,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                          Container(
-                            margin: EdgeInsets.symmetric(
-                                horizontal: 12, vertical: 10),
-                            child: Text(
-                              'I\'m a software engineer from china,who creates open-source projects and writes about code, design, and life.',
-                              style: TextStyle(
-                                color: Colors.grey,
-                                fontSize: 18,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+                  Text(
+                    'Latest Posts',
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                   ),
-                  ImageWrapper(image: 'assets/image/main_page_image.jpg'),
+                  CommonBlankButton(
+                    title: 'View all',
+                    linkAction: () {
+                      Navigator.pushNamed(context, Routes.writing);
+                    },
+                  ),
                 ],
               ),
+              ResponsiveGridView.builder(
+                  shrinkWrap: true,
+                  gridDelegate: const ResponsiveGridDelegate(
+                    childAspectRatio: 1.7,
+                    mainAxisSpacing: 20.0,
+                    crossAxisSpacing: 20.0,
+                    maxCrossAxisExtent: 500,
+                    minCrossAxisExtent: 400,
+                  ),
+                  itemCount: 3,
+                  itemBuilder: (_, int index) {
+                    return Container();
+                  }),
             ],
           ),
         ),

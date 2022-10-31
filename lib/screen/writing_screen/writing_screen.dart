@@ -19,12 +19,21 @@ class _WritingScreenState extends State<WritingScreen> {
   List<CategoryModel> categoryList = [];
   List<BlogModel> blogList = [];
 
+  bool isLoading = true;
+
   @override
   void initState() {
     // TODO: implement initState
-    getCategories();
-    getBlogs();
+    initData();
     super.initState();
+  }
+
+  Future<void> initData() async {
+    await getCategories();
+    await getBlogs();
+    setState(() {
+      isLoading = false;
+    });
   }
 
   Future<void> getCategories() async {
@@ -58,61 +67,64 @@ class _WritingScreenState extends State<WritingScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: CommonAppBar(),
-      body: SingleChildScrollView(
-        child: Container(
-          margin: const EdgeInsets.symmetric(horizontal: 32),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  const Text(
-                    'Writing',
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 40,
-                        fontWeight: FontWeight.bold,
-                        decoration: TextDecoration.none),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Column(
-                    children: getBlogList(),
-                  )
-                ],
-              ),
-              Container(
-                padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                child: Column(
+    return isLoading
+        ? Container()
+        : Scaffold(
+            appBar: CommonAppBar(),
+            body: SingleChildScrollView(
+              child: Container(
+                margin: const EdgeInsets.symmetric(horizontal: 32),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      'Categories',
-                      style: TextStyle(fontSize: 18),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
                     Column(
-                      children: getCategoryList(),
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        const Text(
+                          'Writing',
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 40,
+                              fontWeight: FontWeight.bold,
+                              decoration: TextDecoration.none),
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Column(
+                          children: getBlogList(),
+                        )
+                      ],
+                    ),
+                    Container(
+                      padding:
+                          EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                      child: Column(
+                        children: [
+                          Text(
+                            'Categories',
+                            style: TextStyle(fontSize: 18),
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Column(
+                            children: getCategoryList(),
+                          )
+                        ],
+                      ),
+                      decoration: BoxDecoration(
+                          color: Color.fromRGBO(242, 243, 245, 1.0),
+                          borderRadius: BorderRadius.circular(12)),
                     )
                   ],
                 ),
-                decoration: BoxDecoration(
-                    color: Color.fromRGBO(242, 243, 245, 1.0),
-                    borderRadius: BorderRadius.circular(12)),
-              )
-            ],
-          ),
-        ),
-      ),
-    );
+              ),
+            ),
+          );
   }
 }

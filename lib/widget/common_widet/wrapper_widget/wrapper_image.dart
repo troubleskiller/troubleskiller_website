@@ -11,11 +11,11 @@ class ImageWrapper extends StatelessWidget {
     double width = MediaQuery.of(context).size.width / 4;
     return MediaQuery.of(context).size.width > 800
         ? Container(
-            margin: const EdgeInsets.symmetric(vertical: 24),
+            margin: EdgeInsets.only(left: 30),
             child: Image.asset(
               image,
               width: width,
-              height: width / 0.8,
+              height: width / 1.6,
               fit: BoxFit.cover,
             ),
           )

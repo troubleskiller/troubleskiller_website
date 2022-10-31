@@ -194,7 +194,9 @@ class _CommonBlankButtonState extends State<CommonBlankButton> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                margin: const EdgeInsets.only(right: 5),
+                margin: widget.icon == null
+                    ? EdgeInsets.all(0)
+                    : EdgeInsets.only(right: 5),
                 child: Text(
                   widget.title,
                   style: const TextStyle(

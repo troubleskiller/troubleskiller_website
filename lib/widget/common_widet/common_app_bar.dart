@@ -50,7 +50,7 @@ class CommonAppBar extends StatelessWidget with PreferredSizeWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         Container(
-          padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+          padding: EdgeInsets.symmetric(vertical: 20, horizontal: 80),
           decoration: const BoxDecoration(
               color: Color.fromRGBO(242, 243, 245, 1.0),
               border: Border.symmetric(
@@ -58,7 +58,7 @@ class CommonAppBar extends StatelessWidget with PreferredSizeWidget {
                       width: 1, color: Color.fromRGBO(234, 236, 239, 1.0)))),
           child: Row(
             // mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               CommonButton(
                   title: MediaQuery.of(context).size.width > 600
@@ -93,7 +93,7 @@ class CommonAppBar extends StatelessWidget with PreferredSizeWidget {
                   Navigator.pushNamed(context, Routes.project);
                 },
               ),
-              MediaQuery.of(context).size.width > 600
+              MediaQuery.of(context).size.width > 700
                   ? CommonTextButton(
                       title: 'GitHub',
                       color: Colors.purple,
