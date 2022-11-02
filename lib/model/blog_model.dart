@@ -84,6 +84,7 @@ class BlogModel {
     return map;
   }
 }
+
 class BlogJSONModel {
   BlogJSONModel({
     this.result,
@@ -93,7 +94,7 @@ class BlogJSONModel {
 
   factory BlogJSONModel.fromJson(List<dynamic> parsedJson) {
     List<BlogModel> repos =
-    parsedJson.map((i) => BlogModel.fromJson(i)).toList();
+        parsedJson.map((i) => BlogModel.fromJson(i)).toList();
 
     return BlogJSONModel(
       result: repos,
