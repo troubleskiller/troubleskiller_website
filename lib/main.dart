@@ -31,7 +31,7 @@ class _MyAppState extends State<MyApp> {
   bool isInit = false;
 
   Future<void> initDate() async {
-    githubResponse = await _githubController.getRepos();
+    // githubResponse = await _githubController.getRepos();
     blogResponse = await _blogController.selectAllBlog();
     categoryResponse = await _categoryController.selectAllCategory();
     setState(() {

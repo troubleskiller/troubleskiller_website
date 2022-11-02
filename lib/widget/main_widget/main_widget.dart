@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:troubleskiller_blog/widget/common_widet/wrapper_widget/wrapper_image.dart';
+import 'package:troubleskiller_blog/widget/wrapper_widget/wrapper_image.dart';
 
 class MainWidget extends StatelessWidget {
   const MainWidget({Key? key}) : super(key: key);

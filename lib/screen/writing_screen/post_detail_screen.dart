@@ -3,6 +3,8 @@ import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:troubleskiller_blog/layout/main_layout.dart';
 import 'package:troubleskiller_blog/model/blog_model.dart';
 import 'package:troubleskiller_blog/widget/common_widet/common_app_bar.dart';
+import 'package:troubleskiller_blog/widget/user_widget/user_profile_widget.dart';
+import 'package:troubleskiller_blog/widget/writing_widget/blog_profile_widget.dart';
 
 class PostDetailScreen extends StatelessWidget {
   const PostDetailScreen({Key? key, required this.blogModel}) : super(key: key);
@@ -14,6 +16,8 @@ class PostDetailScreen extends StatelessWidget {
         appBar: const CommonAppBar(),
         body: MainLayout(
             child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // 文章内容 todo： markdown格式
             Column(
@@ -26,6 +30,7 @@ class PostDetailScreen extends StatelessWidget {
                     h1: TextStyle(fontWeight: FontWeight.bold, fontSize: 35),
                     pPadding: EdgeInsets.symmetric(vertical: 10),
                     p: TextStyle(fontWeight: FontWeight.normal, fontSize: 20),
+                    h3: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
                   ),
                 )),
                 SizedBox(
@@ -35,7 +40,15 @@ class PostDetailScreen extends StatelessWidget {
             ),
             // 个人概述卡片 和 文章概述卡片
             Column(
-              children: [],
+              children: [
+                UserProfileWidget(),
+                SizedBox(
+                  height: 30,
+                ),
+                BlogProfileWidget(
+                  blogModel: blogModel,
+                )
+              ],
             ),
           ],
         )));
