@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:troubleskiller_blog/data/common_date.dart';
 import 'package:troubleskiller_blog/model/category_model.dart';
+import 'package:troubleskiller_blog/screen/writing_screen/category_screen.dart';
 
 class CategoryList extends StatefulWidget {
   const CategoryList({Key? key, required this.categoryModel}) : super(key: key);
@@ -26,7 +27,15 @@ class _CategoryListState extends State<CategoryList> {
         });
       },
       child: GestureDetector(
-        onTap: () {},
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (_) =>
+                  CategoryScreen(categoryModel: widget.categoryModel),
+            ),
+          );
+        },
         behavior: HitTestBehavior.translucent,
         child: Container(
           decoration: BoxDecoration(

@@ -73,7 +73,7 @@ class _WritingScreenState extends State<WritingScreen> {
             appBar: CommonAppBar(),
             body: SingleChildScrollView(
               child: Container(
-                margin: const EdgeInsets.symmetric(horizontal: 32),
+                margin: const EdgeInsets.symmetric(horizontal: 80),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -93,7 +93,7 @@ class _WritingScreenState extends State<WritingScreen> {
                               decoration: TextDecoration.none),
                         ),
                         const SizedBox(
-                          height: 20,
+                          height: 40,
                         ),
                         Column(
                           children: getBlogList(),
