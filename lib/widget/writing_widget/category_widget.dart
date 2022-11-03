@@ -1,15 +1,63 @@
 import 'package:flutter/material.dart';
+import 'package:troubleskiller_blog/data/common_date.dart';
 import 'package:troubleskiller_blog/model/category_model.dart';
 
-class CategoryList extends StatelessWidget {
+class CategoryList extends StatefulWidget {
   const CategoryList({Key? key, required this.categoryModel}) : super(key: key);
   final CategoryModel categoryModel;
 
   @override
+  State<CategoryList> createState() => _CategoryListState();
+}
+
+class _CategoryListState extends State<CategoryList> {
+  bool isHove = false;
+  @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {},
-      child: Text(categoryModel.categoryName ?? ''),
+    return MouseRegion(
+      onEnter: (_) {
+        setState(() {
+          isHove = true;
+        });
+      },
+      onExit: (_) {
+        setState(() {
+          isHove = false;
+        });
+      },
+      child: GestureDetector(
+        onTap: () {},
+        behavior: HitTestBehavior.translucent,
+        child: Container(
+          decoration: BoxDecoration(
+              color: isHove ? Colors.green : null,
+              borderRadius: BorderRadius.circular(3)),
+          padding: EdgeInsets.symmetric(horizontal: 5, vertical: 4),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                widget.categoryModel.categoryName ?? '',
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 14,
+                    color: isHove ? Colors.white : Colors.black),
+              ),
+              Text(
+                blogResponse
+                    .where((element) =>
+                        element.categoryId == widget.categoryModel.id)
+                    .length
+                    .toString(),
+                style: TextStyle(
+                    fontWeight: FontWeight.normal,
+                    fontSize: 14,
+                    color: isHove ? Colors.white : Colors.black),
+              )
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

@@ -101,13 +101,16 @@ class _WritingScreenState extends State<WritingScreen> {
                       ],
                     ),
                     Container(
+                      width: 300,
                       padding:
-                          EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                          EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                       child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
                             'Categories',
-                            style: TextStyle(fontSize: 18),
+                            style: TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.bold),
                           ),
                           SizedBox(
                             height: 20,
@@ -119,7 +122,7 @@ class _WritingScreenState extends State<WritingScreen> {
                       ),
                       decoration: BoxDecoration(
                           color: Color.fromRGBO(242, 243, 245, 1.0),
-                          borderRadius: BorderRadius.circular(12)),
+                          borderRadius: BorderRadius.circular(10)),
                     )
                   ],
                 ),

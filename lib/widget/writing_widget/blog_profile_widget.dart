@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:troubleskiller_blog/data/common_date.dart';
 import 'package:troubleskiller_blog/model/blog_model.dart';
+import 'package:troubleskiller_blog/widget/common_widet/common_button.dart';
 
 class BlogProfileWidget extends StatelessWidget {
   const BlogProfileWidget({Key? key, required this.blogModel})
@@ -44,12 +45,14 @@ class BlogProfileWidget extends StatelessWidget {
           SizedBox(
             height: 10,
           ),
-          Text(
-            categoryResponse
+          ContentTextButton(
+            title: categoryResponse
                     .singleWhere(
                         (element) => element.id == blogModel.categoryId)
                     .categoryName ??
                 '',
+            color: Colors.black,
+            linkAction: () {},
           ),
         ],
       ),

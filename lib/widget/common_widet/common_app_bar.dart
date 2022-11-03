@@ -50,7 +50,9 @@ class CommonAppBar extends StatelessWidget with PreferredSizeWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         Container(
-          padding: EdgeInsets.symmetric(vertical: 20, horizontal: 80),
+          padding: EdgeInsets.symmetric(
+              vertical: 20,
+              horizontal: MediaQuery.of(context).size.width > 800 ? 80 : 20),
           decoration: const BoxDecoration(
               color: Color.fromRGBO(242, 243, 245, 1.0),
               border: Border.symmetric(
@@ -60,50 +62,68 @@ class CommonAppBar extends StatelessWidget with PreferredSizeWidget {
             // mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              CommonButton(
-                  title: MediaQuery.of(context).size.width > 600
-                      ? 'troubleskiller'
-                      : '',
-                  icon: Icon(
-                    Icons.save_as_outlined,
-                    color: Colors.grey,
-                  ),
-                  linkAction: () {
-                    Navigator.popUntil(context,
-                        ModalRoute.withName(Navigator.defaultRouteName));
-                  }),
-              CommonTextButton(
-                title: 'About me',
-                color: Colors.green,
-                linkAction: () {
-                  Navigator.pushNamed(context, Routes.aboutMe);
-                },
-              ),
-              CommonTextButton(
-                title: 'Writing',
-                color: Colors.blue,
-                linkAction: () {
-                  Navigator.pushNamed(context, Routes.writing);
-                },
-              ),
-              CommonTextButton(
-                title: 'Project',
-                color: Colors.yellow,
-                linkAction: () {
-                  Navigator.pushNamed(context, Routes.project);
-                },
-              ),
-              MediaQuery.of(context).size.width > 700
-                  ? CommonTextButton(
-                      title: 'GitHub',
-                      color: Colors.purple,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  CommonButton(
+                      title: MediaQuery.of(context).size.width > 800
+                          ? 'troubleskiller'
+                          : '',
+                      icon: Icon(
+                        Icons.save_as_outlined,
+                        color: Colors.grey,
+                      ),
                       linkAction: () {
-                        _launchUrl(
-                          Uri.parse('https://github.com/troubleskiller'),
-                        );
-                      },
-                    )
-                  : Container(),
+                        Navigator.popUntil(context,
+                            ModalRoute.withName(Navigator.defaultRouteName));
+                      }),
+                  SizedBox(
+                    width: 20,
+                  ),
+                  CommonTextButton(
+                    title: 'About me',
+                    color: Colors.green,
+                    linkAction: () {
+                      Navigator.pushNamed(context, Routes.aboutMe);
+                    },
+                  ),
+                  SizedBox(
+                    width: 20,
+                  ),
+                  CommonTextButton(
+                    title: 'Writing',
+                    color: Colors.blue,
+                    linkAction: () {
+                      Navigator.pushNamed(context, Routes.writing);
+                    },
+                  ),
+                  SizedBox(
+                    width: 20,
+                  ),
+                  CommonTextButton(
+                    title: 'Project',
+                    color: Colors.yellow,
+                    linkAction: () {
+                      Navigator.pushNamed(context, Routes.project);
+                    },
+                  ),
+                  SizedBox(
+                    width: 20,
+                  ),
+                  MediaQuery.of(context).size.width > 700
+                      ? CommonTextButton(
+                          title: 'GitHub',
+                          color: Colors.purple,
+                          linkAction: () {
+                            _launchUrl(
+                              Uri.parse('https://github.com/troubleskiller'),
+                            );
+                          },
+                        )
+                      : Container(),
+                ],
+              ),
               CommonButton(
                   icon: Icon(
                     Icons.dark_mode_outlined,
@@ -114,7 +134,7 @@ class CommonAppBar extends StatelessWidget with PreferredSizeWidget {
                       1.0,
                     ),
                   ),
-                  title: MediaQuery.of(context).size.width > 600 ? 'Light' : '',
+                  title: MediaQuery.of(context).size.width > 800 ? 'Light' : '',
                   linkAction: () {}),
             ],
           ),
