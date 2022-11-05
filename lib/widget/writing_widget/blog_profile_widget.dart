@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:troubleskiller_blog/data/common_date.dart';
 import 'package:troubleskiller_blog/model/blog_model.dart';
+import 'package:troubleskiller_blog/screen/writing_screen/category_screen.dart';
 import 'package:troubleskiller_blog/widget/common_widet/common_button.dart';
 
 class BlogProfileWidget extends StatelessWidget {
@@ -52,7 +53,16 @@ class BlogProfileWidget extends StatelessWidget {
                     .categoryName ??
                 '',
             color: Colors.black,
-            linkAction: () {},
+            linkAction: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => CategoryScreen(
+                      categoryModel: categoryResponse.singleWhere(
+                          (element) => element.id == blogModel.categoryId)),
+                ),
+              );
+            },
           ),
         ],
       ),

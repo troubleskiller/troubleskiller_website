@@ -3,6 +3,7 @@ import 'package:troubleskiller_blog/controller/blog_controller/blog_controller.d
 import 'package:troubleskiller_blog/controller/category_controller/category_controller.dart';
 import 'package:troubleskiller_blog/model/blog_model.dart';
 import 'package:troubleskiller_blog/model/category_model.dart';
+import 'package:troubleskiller_blog/screen/writing_screen/post_detail_screen.dart';
 import 'package:troubleskiller_blog/widget/common_widet/common_app_bar.dart';
 import 'package:troubleskiller_blog/widget/writing_widget/category_widget.dart';
 
@@ -59,7 +60,14 @@ class _WritingScreenState extends State<WritingScreen> {
         .map(
           (f) => ButTextButton(
             title: f.title ?? '',
-            linkAction: () async {},
+            linkAction: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => PostDetailScreen(blogModel: f),
+                ),
+              );
+            },
           ),
         )
         .toList();

@@ -39,18 +39,32 @@ class PostDetailScreen extends StatelessWidget {
               ],
             ),
             // 个人概述卡片 和 文章概述卡片
-            Column(
-              children: [
-                UserProfileWidget(),
-                SizedBox(
-                  height: 30,
-                ),
-                BlogProfileWidget(
-                  blogModel: blogModel,
-                )
-              ],
-            ),
+            MediaQuery.of(context).size.width > 1000
+                ? ProfileWidget(
+                    blogModel: blogModel,
+                  )
+                : Container(),
           ],
         )));
+  }
+}
+
+class ProfileWidget extends StatelessWidget {
+  const ProfileWidget({Key? key, required this.blogModel}) : super(key: key);
+  final BlogModel blogModel;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        UserProfileWidget(),
+        SizedBox(
+          height: 30,
+        ),
+        BlogProfileWidget(
+          blogModel: blogModel,
+        )
+      ],
+    );
   }
 }

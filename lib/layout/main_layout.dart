@@ -21,7 +21,7 @@ class PostArticleCard extends StatelessWidget {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width > 800
         ? MediaQuery.of(context).size.width / 1.8
-        : MediaQuery.of(context).size.width;
+        : MediaQuery.of(context).size.width / 1.5;
     return Container(
       width: width,
       child: child,
