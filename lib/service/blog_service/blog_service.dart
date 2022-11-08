@@ -1,12 +1,12 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+import 'package:troubleskiller_blog/data/common_date.dart';
 
 class BlogService {
   Future<dynamic> selectAllBlog() async {
     dynamic response;
     try {
-      response = await Dio()
-          .get('http://127.0.0.1:8080/backend_blog/blog/selectAllBlog');
+      response = await Dio().get('$requestUrl/blog/selectAllBlog');
     } catch (e) {
       if (kDebugMode) {
         print(e);
