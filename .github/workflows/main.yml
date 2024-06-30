@@ -1,0 +1,28 @@
+name: Notion To Blog
+
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  notion-to-blog:
+    if: ${{ github.event.issue.user.login == github.actor && contains(github.event.issue.title, 'notion-ci') }}
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        # Workflows are only triggered when commits (and tags I think, but it would need to be tested) are created pushed using a Personal Access Token (PAT).
+        # ref: https://github.com/EndBug/add-and-commit/issues/311#issuecomment-948749635
+        token: ${{secrets.GITHUB_TOKEN}}
+
+    - name: Markdown From Notion
+      uses: troubleskiller/notion_to_github@master
+      with:
+        notion_token: ${{secrets.NOTION_TOKEN}}
+        notion_database_id: ${{secrets.DATEBASE_ID}}
+    - name: push to github
+      uses: EndBug/add-and-commit@v7
+      with:
+        branch: master
+        message: 'upload new blog'
